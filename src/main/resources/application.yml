@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+
+server:
+  port: 8080
+  context-path: /PapiMQ
+
+papimq:
+  #PapiMQ服务serverId，不能重复 0~31
+  serverId: 0
+  #默认0，serverId+dataCenterId不重复即可
+  dataCenterId: 0

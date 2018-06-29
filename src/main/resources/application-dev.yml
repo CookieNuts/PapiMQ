@@ -1,0 +1,10 @@
+redis:
+  host: 127.0.0.1
+  port: 6379
+  pool:
+    maxTotal: 1000
+    maxIdle: 20
+    minIdle: 5
+    testOnBorrow: true
+    testOnReturn: true
+    maxWaitMillis: 10000
