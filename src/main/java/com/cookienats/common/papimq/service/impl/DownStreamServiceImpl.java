@@ -3,13 +3,13 @@ package com.cookienats.common.papimq.service.impl;
 import com.cookienats.common.papimq.common.CommonConstant;
 import com.cookienats.common.papimq.common.CommonErrorCode;
 import com.cookienats.common.papimq.common.CommonException;
-import com.cookienats.common.papimq.common.CommonResult;
 import com.cookienats.common.papimq.dao.IMessageDao;
 import com.cookienats.common.papimq.dao.IRelationDao;
 import com.cookienats.common.papimq.dao.ITopicDao;
 import com.cookienats.common.papimq.entity.MessageEntity;
 import com.cookienats.common.papimq.entity.RelationEntity;
 import com.cookienats.common.papimq.entity.TopicEntity;
+import com.cookienats.common.papimq.protos.common.Enums;
 import com.cookienats.common.papimq.service.IDownStreamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +44,7 @@ public class DownStreamServiceImpl extends BaseServiceImpl implements IDownStrea
     }
 
     @Override
-    public void reportConsumeResult(String topicName, String subscriberName, CommonResult commonResult) throws CommonException {
+    public void reportConsumeResult(String topicName, String subscriberName, Enums.ConsumeResult consumeResult) throws CommonException {
         RelationEntity relationEntity = relationDao.fetchRelation(topicName, subscriberName);
         TopicEntity topicEntity = topicDao.getTopicInfo(topicName);
         if(topicEntity == null){
@@ -55,7 +55,7 @@ public class DownStreamServiceImpl extends BaseServiceImpl implements IDownStrea
             Integer expectRegion = relationEntity.getRegion();
             Long expectOffset = relationEntity.getOffset();
             logger.info("[Report] Consume Message Result:[{}] Before. topicName:[{}] subscriberName:[{}] region:[{}] offset:[{}] "
-                    , topicName, subscriberName, commonResult, expectRegion, expectOffset);
+                    , topicName, subscriberName, consumeResult, expectRegion, expectOffset);
 
             //查询当前topic当前region
             Integer currentRegion = topicEntity.getCurrentRegion();
@@ -66,7 +66,7 @@ public class DownStreamServiceImpl extends BaseServiceImpl implements IDownStrea
                 throw new CommonException(CommonErrorCode.DSTREAM_REPORT_FAIL_ERROR," 消息记录不存在！");
             }
 
-            switch (commonResult){
+            switch (consumeResult){
                 case CONSUME_SUCCESS:           //消费成功offset指向下一条消息
                     //读取到Message的region最后一条记录，需要从下一个region开始读取
                     if(expectRegion < currentRegion && expectOffset + 1 >= CommonConstant.REGION_MAX_MESSAGE_COUNTS){
@@ -89,7 +89,7 @@ public class DownStreamServiceImpl extends BaseServiceImpl implements IDownStrea
                     throw new CommonException(CommonErrorCode.DSTREAM_REPORT_FAIL_ERROR, " Message消费结果有误！");
             }
             logger.info("[Report] Consume Message Result:[{}] After. topicName:[{}] subscriberName:[{}] region:[{}] offset:[{}] failCount:[{}]"
-                    , topicName, subscriberName, commonResult, relationEntity.getRegion(), relationEntity.getOffset(), relationEntity.getFailNum());
+                    , topicName, subscriberName, consumeResult, relationEntity.getRegion(), relationEntity.getOffset(), relationEntity.getFailNum());
 
             relationDao.updateRelation(topicName, subscriberName,  relationEntity);
         }

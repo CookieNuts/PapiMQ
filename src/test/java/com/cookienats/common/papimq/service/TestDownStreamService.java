@@ -1,9 +1,9 @@
 package com.cookienats.common.papimq.service;
 
 import com.cookienats.common.papimq.common.CommonException;
-import com.cookienats.common.papimq.common.CommonResult;
 import com.cookienats.common.papimq.common.utils.KryoUtil;
 import com.cookienats.common.papimq.entity.MessageEntity;
+import com.cookienats.common.papimq.protos.common.Enums;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,12 +21,12 @@ public class TestDownStreamService extends TestBase {
 
     @Test
     public void testReportSuccessConsumeResult() throws CommonException  {
-        downStreamService.reportConsumeResult("topic-test01", "subscriber-test01", CommonResult.CONSUME_SUCCESS);
+        downStreamService.reportConsumeResult("topic-test01", "subscriber-test01", Enums.ConsumeResult.CONSUME_SUCCESS);
     }
 
     @Test
     public void testReportFailConsumeResult() throws CommonException  {
-        downStreamService.reportConsumeResult("topic-test01", "subscriber-test01", CommonResult.CONSUME_FAIL);
+        downStreamService.reportConsumeResult("topic-test01", "subscriber-test01", Enums.ConsumeResult.CONSUME_FAIL);
     }
 
 }

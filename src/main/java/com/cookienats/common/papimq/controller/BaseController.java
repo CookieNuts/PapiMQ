@@ -1,11 +1,10 @@
-package com.cookienats.common.papimq.Controller;
+package com.cookienats.common.papimq.controller;
 
 import com.cookienats.common.papimq.common.CommonConstant;
 import com.cookienats.common.papimq.common.utils.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 public class BaseController {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());

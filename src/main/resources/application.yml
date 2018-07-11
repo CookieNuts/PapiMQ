@@ -11,3 +11,7 @@ papimq:
   serverId: 0
   #默认0，serverId+dataCenterId不重复即可
   dataCenterId: 0
+  #MQ服务地址
+  host: localhost
+  #MQ服务端口
+  port: 9539
