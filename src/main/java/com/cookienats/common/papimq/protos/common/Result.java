@@ -35,6 +35,22 @@ public final class Result {
      * <code>OK = 1;</code>
      */
     OK(1),
+    /**
+     * <pre>
+     *请求超时
+     * </pre>
+     *
+     * <code>CONNECT_TIME_OUT = 2;</code>
+     */
+    CONNECT_TIME_OUT(2),
+    /**
+     * <pre>
+     *暂无消息可消费
+     * </pre>
+     *
+     * <code>MESSAGE_EOF = 3;</code>
+     */
+    MESSAGE_EOF(3),
     UNRECOGNIZED(-1),
     ;
 
@@ -54,6 +70,22 @@ public final class Result {
      * <code>OK = 1;</code>
      */
     public static final int OK_VALUE = 1;
+    /**
+     * <pre>
+     *请求超时
+     * </pre>
+     *
+     * <code>CONNECT_TIME_OUT = 2;</code>
+     */
+    public static final int CONNECT_TIME_OUT_VALUE = 2;
+    /**
+     * <pre>
+     *暂无消息可消费
+     * </pre>
+     *
+     * <code>MESSAGE_EOF = 3;</code>
+     */
+    public static final int MESSAGE_EOF_VALUE = 3;
 
 
     public final int getNumber() {
@@ -76,6 +108,8 @@ public final class Result {
       switch (value) {
         case 0: return SYSTEM_ERROR;
         case 1: return OK;
+        case 2: return CONNECT_TIME_OUT;
+        case 3: return MESSAGE_EOF;
         default: return null;
       }
     }
@@ -137,9 +171,10 @@ public final class Result {
       descriptor;
   static {
     String[] descriptorData = {
-      "\n\023common/Result.proto*(\n\014CommonResult\022\020\n" +
-      "\014SYSTEM_ERROR\020\000\022\006\n\002OK\020\001B,\n*com.cookienat" +
-      "s.common.papimq.protos.commonb\006proto3"
+      "\n\023common/Result.proto*O\n\014CommonResult\022\020\n" +
+      "\014SYSTEM_ERROR\020\000\022\006\n\002OK\020\001\022\024\n\020CONNECT_TIME_" +
+      "OUT\020\002\022\017\n\013MESSAGE_EOF\020\003B,\n*com.cookienats" +
+      ".common.papimq.protos.commonb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

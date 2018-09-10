@@ -43,6 +43,7 @@ public class UpStreamServiceImpl extends BaseServiceImpl implements IUpStreamSer
                 topicEntity.setCurrentRegion(region);
                 topicDao.updateTopicInfo(topicEntity);
             }
+            logger.info("[Enque] Message. topicName:[{}] currentRegion:[{}] currentIndex:[{}]", topicName, region,messageCount);
             message.setId(messageCount);    //id从0开始，当前消息长度即为下一条消息id
             messageDao.enqueMessage(topicName, region, message);
         }

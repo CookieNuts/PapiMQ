@@ -15,18 +15,18 @@ public class TestDownStreamService extends TestBase {
 
     @Test
     public void testFetchMessage() throws CommonException {
-        MessageEntity messageEntity = downStreamService.fetchMessage("topic-test01", "subscriber-test01");
+        MessageEntity messageEntity = downStreamService.fetchMessage("topic-test1", "subscriber-test1");
         logger.info("[Fetch] Message: {}", KryoUtil.readObjectFromByteArray(messageEntity.getMessageBody(), HashMap.class));
     }
 
     @Test
     public void testReportSuccessConsumeResult() throws CommonException  {
-        downStreamService.reportConsumeResult("topic-test01", "subscriber-test01", Enums.ConsumeResult.CONSUME_SUCCESS);
+        downStreamService.reportConsumeResult("topic-test1", "subscriber-test1", Enums.ConsumeResult.CONSUME_SUCCESS);
     }
 
     @Test
     public void testReportFailConsumeResult() throws CommonException  {
-        downStreamService.reportConsumeResult("topic-test01", "subscriber-test01", Enums.ConsumeResult.CONSUME_FAIL);
+        downStreamService.reportConsumeResult("topic-test1", "subscriber-test1", Enums.ConsumeResult.CONSUME_FAIL);
     }
 
 }
