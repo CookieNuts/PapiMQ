@@ -23,7 +23,7 @@ public class ConsumerStressTest {
             for (int i = 0; i < CONSUMER_THREADCOUNT; i++){
                 consumerThreadPool.submit(new ConsumerTask(i + 1));
             }
-            Thread.sleep(100);
+            Thread.sleep(200);
         }
     }
 

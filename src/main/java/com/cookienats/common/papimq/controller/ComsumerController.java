@@ -77,11 +77,11 @@ public class ComsumerController extends BaseController {
                     super.delRequestId(String.valueOf(requestId));
                 }
             }else{
-                logger.error("ReportConsumeResult Fetch LockKey Failed! SubscriberName:[{}]", subscriberName);
+                logger.warn("ReportConsumeResult Fetch LockKey Failed! SubscriberName:[{}]", subscriberName);
                 builder.setResult(Result.CommonResult.CONNECT_TIME_OUT);
             }
         }else{
-            logger.warn("ReportConsumeResult requestId:[{}] NOT Exist! Please FetchMessage First!", requestId);
+            logger.error("ReportConsumeResult requestId:[{}] NOT Exist! Please FetchMessage First!", requestId);
             builder.setResult(Result.CommonResult.SYSTEM_ERROR);
         }
 
