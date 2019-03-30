@@ -23,7 +23,7 @@ public class TestUpStreamService extends TestBase {
         list.add("tete");
         list.add("1212");
         messageEntity.setMessageBody(KryoUtil.writeObjectToByteArray(list));
-        upStreamService.enqueMessage("topic-test01", messageEntity);
+        upStreamService.enqueMessage("topic-test1", messageEntity);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class TestUpStreamService extends TestBase {
             map.put("title","title"+i);
             map.put("value", "value"+i);
             temp.setMessageBody(KryoUtil.writeObjectToByteArray(map));
-            upStreamService.enqueMessage("topic-test01", temp);
+            upStreamService.enqueMessage("topic-test1", temp);
             logger.info("[Enque] Message: {}", JSONObject.toJSONString(temp));
         }
     }

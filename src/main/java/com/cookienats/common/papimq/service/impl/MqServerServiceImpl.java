@@ -1,7 +1,5 @@
 package com.cookienats.common.papimq.service.impl;
 
-import com.cookienats.common.papimq.common.CommonConstant;
-import com.cookienats.common.papimq.common.CommonEnum;
 import com.cookienats.common.papimq.common.CommonErrorCode;
 import com.cookienats.common.papimq.common.CommonException;
 import com.cookienats.common.papimq.dao.IMessageDao;

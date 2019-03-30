@@ -12,11 +12,11 @@ public class TestClean extends TestBase{
     public void testClean() throws CommonException {
         logger.info("Junit Test After Start!");
         logger.info("Clean relation!");
-        mqServerService.unsubscriberTopic("topic-test01", "subscriber-test01");
+        mqServerService.unsubscriberTopic("topic-test1", "subscriber-test1");
         logger.info("Clean subscriber!");
-        mqServerService.delSubscriber("subscriber-test01");
+        mqServerService.delSubscriber("subscriber-test1");
         logger.info("Clean topic!");
-        mqServerService.delTopic("topic-test01");
+        mqServerService.delTopic("topic-test1");
         logger.info("Junit Test After End!");
     }
 }

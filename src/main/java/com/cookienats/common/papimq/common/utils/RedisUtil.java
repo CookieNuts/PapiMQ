@@ -98,6 +98,43 @@ public class RedisUtil {
         }
     }
 
+    /**
+     * 查找key是否存在
+     * @param key
+     * @return
+     */
+    public boolean exsits(String key) {
+        Jedis jedis = null;
+        try {
+            jedis = getJedis();
+            return jedis.exists(key.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 查找key是否存在
+     * @param key
+     * @return
+     */
+    public boolean exsits(String key, Integer selectDB) {
+        Jedis jedis = null;
+        try {
+            jedis = getJedis();
+            jedis.select(selectDB);
+            return jedis.exists(key.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
     public void set(String key, String value){
         Jedis jedis = null;
         try {
@@ -144,6 +181,24 @@ public class RedisUtil {
         Jedis jedis = null;
         try {
             jedis = getJedis();
+            if(LOCK_SUCCESS.equals(jedis.set(key, value,"NX","PX",time))){
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            returnResource(jedis);
+        }
+        return false;
+    }
+
+    public boolean setNX(String key, String value,long time,int selectDB) {
+        final String LOCK_SUCCESS = "OK";
+        Jedis jedis = null;
+        try {
+            jedis = getJedis();
+            jedis.select(selectDB);
             if(LOCK_SUCCESS.equals(jedis.set(key, value,"NX","PX",time))){
                 return true;
             }
@@ -242,6 +297,24 @@ public class RedisUtil {
         Jedis jedis = null;
         try {
             jedis = getJedis();
+            jedis.del(key.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * @功能: 删除k-v
+     * @param key
+     * @return
+     */
+    public void del(String key, Integer selectDB) {
+        Jedis jedis = null;
+        try {
+            jedis = getJedis();
+            jedis.select(selectDB);
             jedis.del(key.getBytes());
         } catch (Exception e) {
             e.printStackTrace();

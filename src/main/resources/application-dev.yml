@@ -8,3 +8,7 @@ redis:
     testOnBorrow: true
     testOnReturn: true
     maxWaitMillis: 10000
+
+logging:
+  path: /tmp/logs/PapiMQ
+  config: classpath:logback-spring.xml
